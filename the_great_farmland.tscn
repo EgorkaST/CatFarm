@@ -1,3 +1,66 @@
-[gd_scene format=3 uid="uid://c1fuyxxqeg52q"]
+[gd_scene load_steps=10 format=3 uid="uid://c1fuyxxqeg52q"]
+
+[ext_resource type="Texture2D" uid="uid://cxem5d0sb6qhp" path="res://placeholders/templategrid_albedo.png" id="1_0wce5"]
+[ext_resource type="Script" path="res://Camera3D.gd" id="1_u10tv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4ky2h"]
+sky_top_color = Color(0.466667, 0.596078, 0.905882, 1)
+sky_horizon_color = Color(0.719608, 0.77451, 0.944118, 1)
+ground_bottom_color = Color(0.411765, 0.501961, 0.870588, 1)
+ground_horizon_color = Color(0.719608, 0.77451, 0.944118, 1)
+
+[sub_resource type="Sky" id="Sky_rfsyp"]
+sky_material = SubResource("ProceduralSkyMaterial_4ky2h")
+
+[sub_resource type="Environment" id="Environment_etgf2"]
+background_mode = 2
+sky = SubResource("Sky_rfsyp")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3iffy"]
+size = Vector3(30, 1, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bldco"]
+albedo_texture = ExtResource("1_0wce5")
+
+[sub_resource type="BoxMesh" id="BoxMesh_jpkna"]
+size = Vector3(30, 1, 30)
+subdivide_width = 5
+subdivide_height = 4
+subdivide_depth = 8
+
+[sub_resource type="SphereMesh" id="SphereMesh_x0xt0"]
+radial_segments = 8
+rings = 4
 
 [node name="TheGreatFarmland" type="Node3D"]
+
+[node name="LevelProperties" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="LevelProperties"]
+transform = Transform3D(-0.999962, -0.00830422, 0.00268219, 0, 0.307357, 0.951594, -0.00872664, 0.951558, -0.307345, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="LevelProperties"]
+environment = SubResource("Environment_etgf2")
+
+[node name="Player" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Player" node_paths=PackedStringArray("debug_node")]
+transform = Transform3D(1, 0, 0, 0, 0.85705, 0.515233, 0, -0.515233, 0.85705, 0, 5.10633, 0)
+script = ExtResource("1_u10tv")
+debug_node = NodePath("../../World/debugDot")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Land" type="StaticBody3D" parent="World"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Land"]
+shape = SubResource("BoxShape3D_3iffy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Land"]
+material_override = SubResource("StandardMaterial3D_bldco")
+mesh = SubResource("BoxMesh_jpkna")
+
+[node name="debugDot" type="CSGMesh3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.18807, -7.32578)
+mesh = SubResource("SphereMesh_x0xt0")
