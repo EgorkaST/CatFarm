@@ -24,3 +24,18 @@ func _process(delta):
 		debug_node.set_position(result.position)
 	else:
 		debug_node.visible = false
+	_rotate_camera(delta)
+
+func _rotate_camera(delta):
+	var viewportWidth = get_viewport().get_visible_rect().size.x
+	var mousePos = get_viewport().get_mouse_position().x
+	var rotation_amount = 40
+	if(mousePos < 40):
+		print('rotateCamLeft')
+		self.rotation_degrees.y = self.rotation_degrees.y + rotation_amount * delta
+		return
+	if(mousePos > viewportWidth-40):
+		print('rotateCamRight')
+		self.rotation_degrees.y = self.rotation_degrees.y - rotation_amount * delta
+		return
+	

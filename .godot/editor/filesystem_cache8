@@ -1,6 +1,7 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1698162629
+::res://::1698224366
+Camera3D.gd::GDScript::-1::1698165724::0::1::::<>Camera3D<>::
 icon.svg::CompressedTexture2D::7355644369139907917::1698160432::1698160440::1::::<><>::
-the_great_farmland.tscn::PackedScene::6609331633954528206::1698161400::0::1::::<><>::
-::res://placeholders/::1698162629
+the_great_farmland.tscn::PackedScene::6609331633954528206::1698165751::0::1::::<><>::uid://cxem5d0sb6qhp::::res://placeholders/templategrid_albedo.png<>res://Camera3D.gd
+::res://placeholders/::1698162635
 templategrid_albedo.png::CompressedTexture2D::6396224656818102469::1698162612::1698162635::1::::<><>::
