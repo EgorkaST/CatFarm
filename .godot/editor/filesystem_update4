@@ -1,2 +1,8 @@
 res://the_great_farmland.tscn
-res://Camera3D.gd
+res://Player.gd
+res://plants/plantInfo.gd
+res://scripts/state macine/state.gd
+res://scripts/state macine/stateMacine.gd
+res://scripts/state macine/states/interaction.gd
+res://scripts/state macine/StateMacine.gd
+res://scripts/state macine/StateMacinesState.gd

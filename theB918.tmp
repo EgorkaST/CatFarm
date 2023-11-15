@@ -19,7 +19,8 @@ background_mode = 2
 sky = SubResource("Sky_rfsyp")
 
 [sub_resource type="GDScript" id="GDScript_4xkvb"]
-script/source = "extends Node
+script/source = "
+extends Node3D
 class_name State
 
 func process_func(_delta:float) -> void: pass

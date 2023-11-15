@@ -1,7 +1,22 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1698224366
-Camera3D.gd::GDScript::-1::1698165724::0::1::::<>Camera3D<>::
+::res://::1700071024
+Camera3D.gd::GDScript::-1::1698856297::0::1::::<>Camera3D<>::
 icon.svg::CompressedTexture2D::7355644369139907917::1698160432::1698160440::1::::<><>::
-the_great_farmland.tscn::PackedScene::6609331633954528206::1698165751::0::1::::<><>::uid://cxem5d0sb6qhp::::res://placeholders/templategrid_albedo.png<>res://Camera3D.gd
-::res://placeholders/::1698162635
+plants.gd::GDScript::-1::1698528714::0::1::::<>MeshInstance3D<>::
+the_great_farmland.tscn::PackedScene::89548367678794432::1700071024::0::1::::<><>::uid://cxem5d0sb6qhp::::res://placeholders/templategrid_albedo.png<>res://Camera3D.gd<>res://scripts/state macine/StateMacine.gd<>res://scripts/state macine/states/interaction.gd
+::res://placeholders/::1699972826
+demo-seed.png::CompressedTexture2D::2706085191498490179::1699972823::1699972826::1::::<><>::
+DZbvdziIbpg.jpg::CompressedTexture2D::2145351181793361229::1698240178::1698240184::1::::<><>::
+paw-coursor.png::CompressedTexture2D::264412354435068083::1699628680::1699628681::1::::<><>::
+plant1.tres::BoxMesh::3670926272854555991::1698860850::0::1::::<><>::
+plant2.tres::CylinderMesh::1758795087851734083::1698860872::0::1::::<><>::
+Sprite-0001.png::CompressedTexture2D::4959677719489878756::1698233011::1698233011::1::::<><>::
 templategrid_albedo.png::CompressedTexture2D::6396224656818102469::1698162612::1698162635::1::::<><>::
+::res://plants/::1699972826
+plantInfo.gd::GDScript::-1::1699972784::0::1::::PlantData<>Resource<>::
+::res://scripts/::1700064943
+::res://scripts/state macine/::1700070962
+State.gd::GDScript::-1::1700069063::0::1::::State<>Node<>::
+StateMacine.gd::GDScript::-1::1700070962::0::1::::StateMacine<>Node<>::
+::res://scripts/state macine/states/::1700070568
+interaction.gd::GDScript::-1::1700070568::0::1::::<>State<>::
