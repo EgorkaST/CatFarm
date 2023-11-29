@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf26fecn3by6t"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_bwwpo"]
+radial_segments = 16
+rings = 8
+
+[node name="plantGhost" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_bwwpo")

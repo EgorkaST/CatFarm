@@ -1,5 +1,5 @@
 class_name StateMacinesState
-extends Node
+extends Node3D
 
 #reference for statemacine
 var stateMacine = null 

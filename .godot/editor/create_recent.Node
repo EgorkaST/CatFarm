@@ -1,7 +1,7 @@
+MeshInstance3D
+Node3D
 Node
 StateMacine
-Node3D
-MeshInstance3D
 Timer
 CSGMesh3D
 CollisionShape3D

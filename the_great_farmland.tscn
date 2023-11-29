@@ -1,9 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bjm335yro5ce"]
+[gd_scene load_steps=16 format=3 uid="uid://cq32gxjg61p4d"]
 
 [ext_resource type="Texture2D" uid="uid://cxem5d0sb6qhp" path="res://placeholders/templategrid_albedo.png" id="1_0wce5"]
 [ext_resource type="Script" path="res://Camera3D.gd" id="1_u10tv"]
-[ext_resource type="Script" path="res://scripts/state macine/StateMacine.gd" id="2_hn7lh"]
+[ext_resource type="Script" path="res://scripts/state macine/PlayerStateMacine.gd" id="2_hn4f7"]
 [ext_resource type="Script" path="res://scripts/state macine/states/interaction.gd" id="3_cqd5r"]
+[ext_resource type="Script" path="res://scripts/state macine/states/plant.gd" id="4_2p8nh"]
+[ext_resource type="PackedScene" uid="uid://cf26fecn3by6t" path="res://assets/scenes/plantGhost.tscn" id="5_4nbfu"]
+[ext_resource type="Script" path="res://scripts/state macine/states/delete.gd" id="5_govln"]
+[ext_resource type="PackedScene" uid="uid://o13fev2aoqyh" path="res://assets/scenes/genericPlant.tscn" id="5_tq5y2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4ky2h"]
 sky_top_color = Color(0.466667, 0.596078, 0.905882, 1)
@@ -61,12 +65,20 @@ script = SubResource("GDScript_4xkvb")
 transform = Transform3D(1, 0, 0, 0, 0.85705, 0.515233, 0, -0.515233, 0.85705, 0, 5.10633, 0)
 script = ExtResource("1_u10tv")
 
-[node name="StateMacine" type="Node" parent="Player"]
-script = ExtResource("2_hn7lh")
+[node name="StateMacine2" type="Node3D" parent="Player"]
+script = ExtResource("2_hn4f7")
 initial_state = NodePath("interaction")
 
-[node name="interaction" type="Node" parent="Player/StateMacine"]
+[node name="plant" type="Node3D" parent="Player/StateMacine2"]
+script = ExtResource("4_2p8nh")
+plantGhostScene = ExtResource("5_4nbfu")
+plantScene = ExtResource("5_tq5y2")
+
+[node name="interaction" type="Node3D" parent="Player/StateMacine2"]
 script = ExtResource("3_cqd5r")
+
+[node name="delete" type="Node3D" parent="Player/StateMacine2"]
+script = ExtResource("5_govln")
 
 [node name="World" type="Node3D" parent="."]
 
