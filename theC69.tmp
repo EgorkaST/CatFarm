@@ -1,0 +1,125 @@
+[gd_scene load_steps=19 format=3 uid="uid://cq32gxjg61p4d"]
+
+[ext_resource type="Texture2D" uid="uid://cxem5d0sb6qhp" path="res://placeholders/templategrid_albedo.png" id="1_0wce5"]
+[ext_resource type="Script" path="res://scripts/RTScamera/rtsCam.gd" id="1_14cdu"]
+[ext_resource type="Script" path="res://Camera3D.gd" id="1_u10tv"]
+[ext_resource type="Script" path="res://scripts/state macine/PlayerStateMacine.gd" id="2_hn4f7"]
+[ext_resource type="Script" path="res://scripts/state macine/states/interaction.gd" id="3_cqd5r"]
+[ext_resource type="Script" path="res://scripts/state macine/states/plant.gd" id="4_2p8nh"]
+[ext_resource type="PackedScene" uid="uid://cf26fecn3by6t" path="res://assets/scenes/plantGhost.tscn" id="5_4nbfu"]
+[ext_resource type="Script" path="res://scripts/state macine/states/delete.gd" id="5_govln"]
+[ext_resource type="PackedScene" uid="uid://o13fev2aoqyh" path="res://assets/scenes/genericPlant.tscn" id="5_tq5y2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4ky2h"]
+sky_top_color = Color(0.466667, 0.596078, 0.905882, 1)
+sky_horizon_color = Color(0.719608, 0.77451, 0.944118, 1)
+ground_bottom_color = Color(0.411765, 0.501961, 0.870588, 1)
+ground_horizon_color = Color(0.719608, 0.77451, 0.944118, 1)
+
+[sub_resource type="Sky" id="Sky_rfsyp"]
+sky_material = SubResource("ProceduralSkyMaterial_4ky2h")
+
+[sub_resource type="Environment" id="Environment_etgf2"]
+background_mode = 2
+sky = SubResource("Sky_rfsyp")
+
+[sub_resource type="GDScript" id="GDScript_4xkvb"]
+script/source = "extends Node
+class_name State
+
+func process_func(_delta:float) -> void: pass
+	
+func physics_process_func(_delta:float) -> void: pass
+
+func on_stste_enter() -> void: pass
+
+func on_stste_exit() -> void: pass
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3iffy"]
+size = Vector3(30, 1, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bldco"]
+albedo_texture = ExtResource("1_0wce5")
+
+[sub_resource type="BoxMesh" id="BoxMesh_jpkna"]
+size = Vector3(30, 1, 30)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wjlom"]
+radius = 10.0
+height = 20.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wqu5r"]
+radius = 10.0
+
+[node name="TheGreatFarmland" type="Node3D"]
+
+[node name="LevelProperties" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="LevelProperties"]
+transform = Transform3D(-0.999962, -0.00830422, 0.00268219, 0, 0.307357, 0.951594, -0.00872664, 0.951558, -0.307345, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="LevelProperties"]
+environment = SubResource("Environment_etgf2")
+
+[node name="Player" type="Node3D" parent="."]
+script = SubResource("GDScript_4xkvb")
+
+[node name="rtsCam" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.66787, 0)
+script = ExtResource("1_14cdu")
+
+[node name="playerCam" type="Camera3D" parent="Player/rtsCam"]
+transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, 0, 0, 0)
+fov = 90.0
+size = 10.0
+near = 0.001
+script = ExtResource("1_u10tv")
+
+[node name="StateMacine2" type="Node3D" parent="Player"]
+script = ExtResource("2_hn4f7")
+initial_state = NodePath("interaction")
+
+[node name="plant" type="Node3D" parent="Player/StateMacine2" node_paths=PackedStringArray("playerCam")]
+script = ExtResource("4_2p8nh")
+plantGhostScene = ExtResource("5_4nbfu")
+plantScene = ExtResource("5_tq5y2")
+playerCam = NodePath("../../rtsCam/playerCam")
+
+[node name="interaction" type="Node3D" parent="Player/StateMacine2"]
+script = ExtResource("3_cqd5r")
+
+[node name="delete" type="Node3D" parent="Player/StateMacine2"]
+script = ExtResource("5_govln")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Land2" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 9.03332)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Land2"]
+shape = SubResource("BoxShape3D_3iffy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Land2"]
+material_override = SubResource("StandardMaterial3D_bldco")
+mesh = SubResource("BoxMesh_jpkna")
+skeleton = NodePath("../../Land2")
+
+[node name="Land" type="StaticBody3D" parent="World"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Land"]
+shape = SubResource("BoxShape3D_3iffy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Land"]
+material_override = SubResource("StandardMaterial3D_bldco")
+mesh = SubResource("BoxMesh_jpkna")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.57921, -6.62969, -8.10173)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/StaticBody3D"]
+mesh = SubResource("SphereMesh_wjlom")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/StaticBody3D"]
+shape = SubResource("SphereShape3D_wqu5r")

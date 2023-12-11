@@ -1,10 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://cf26fecn3by6t"]
+[gd_scene load_steps=5 format=3 uid="uid://cf26fecn3by6t"]
+
+[ext_resource type="Script" path="res://assets/scenes/plantGhost.gd" id="1_uscss"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s0etn"]
+albedo_color = Color(0.737255, 0.603922, 0.164706, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_bwwpo"]
 radial_segments = 16
 rings = 8
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_yk2ft"]
+
 [node name="plantGhost" type="Node3D"]
+script = ExtResource("1_uscss")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_s0etn")
 mesh = SubResource("SphereMesh_bwwpo")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_yk2ft")
+
+[connection signal="area_shape_entered" from="Area3D" to="." method="_on_area_3d_area_shape_entered"]
+[connection signal="body_shape_entered" from="Area3D" to="." method="_on_area_3d_body_shape_entered"]

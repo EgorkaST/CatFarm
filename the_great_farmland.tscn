@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://cq32gxjg61p4d"]
+[gd_scene load_steps=19 format=3 uid="uid://cq32gxjg61p4d"]
 
 [ext_resource type="Texture2D" uid="uid://cxem5d0sb6qhp" path="res://placeholders/templategrid_albedo.png" id="1_0wce5"]
+[ext_resource type="Script" path="res://scripts/RTScamera/rtsCam.gd" id="1_14cdu"]
 [ext_resource type="Script" path="res://Camera3D.gd" id="1_u10tv"]
 [ext_resource type="Script" path="res://scripts/state macine/PlayerStateMacine.gd" id="2_hn4f7"]
 [ext_resource type="Script" path="res://scripts/state macine/states/interaction.gd" id="3_cqd5r"]
@@ -43,9 +44,13 @@ albedo_texture = ExtResource("1_0wce5")
 
 [sub_resource type="BoxMesh" id="BoxMesh_jpkna"]
 size = Vector3(30, 1, 30)
-subdivide_width = 5
-subdivide_height = 4
-subdivide_depth = 8
+
+[sub_resource type="SphereMesh" id="SphereMesh_wjlom"]
+radius = 10.0
+height = 20.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wqu5r"]
+radius = 10.0
 
 [node name="TheGreatFarmland" type="Node3D"]
 
@@ -61,18 +66,26 @@ environment = SubResource("Environment_etgf2")
 [node name="Player" type="Node3D" parent="."]
 script = SubResource("GDScript_4xkvb")
 
-[node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.85705, 0.515233, 0, -0.515233, 0.85705, 0, 5.10633, 0)
+[node name="rtsCam" type="Node3D" parent="Player"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 2.60691, 0)
+script = ExtResource("1_14cdu")
+
+[node name="playerCam" type="Camera3D" parent="Player/rtsCam"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+fov = 90.0
+size = 10.0
+near = 0.001
 script = ExtResource("1_u10tv")
 
 [node name="StateMacine2" type="Node3D" parent="Player"]
 script = ExtResource("2_hn4f7")
 initial_state = NodePath("interaction")
 
-[node name="plant" type="Node3D" parent="Player/StateMacine2"]
+[node name="plant" type="Node3D" parent="Player/StateMacine2" node_paths=PackedStringArray("playerCam")]
 script = ExtResource("4_2p8nh")
 plantGhostScene = ExtResource("5_4nbfu")
 plantScene = ExtResource("5_tq5y2")
+playerCam = NodePath("../../rtsCam/playerCam")
 
 [node name="interaction" type="Node3D" parent="Player/StateMacine2"]
 script = ExtResource("3_cqd5r")
@@ -101,3 +114,12 @@ shape = SubResource("BoxShape3D_3iffy")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Land"]
 material_override = SubResource("StandardMaterial3D_bldco")
 mesh = SubResource("BoxMesh_jpkna")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.57921, -6.62969, -8.10173)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/StaticBody3D"]
+mesh = SubResource("SphereMesh_wjlom")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/StaticBody3D"]
+shape = SubResource("SphereShape3D_wqu5r")

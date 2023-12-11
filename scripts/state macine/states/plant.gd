@@ -2,16 +2,18 @@ extends StateMacinesState
 
 @export var plantGhostScene: PackedScene
 @export var plantScene: PackedScene
+@export var playerCam: Camera3D
 #@export_file("*.tscn") var plantGhostNode
 var defaultCursor = load("res://assets/cursors/default-cursor.png")
 var plantCursor = load("res://assets/cursors/plant-cursor.png")
 var plantGhost
-var space
+var raycast_Info
 
 func state_enter(_message = {}) -> void: 
 	Input.set_custom_mouse_cursor(plantCursor)
+	raycast_Info = paycast_from_cam()
 	plantGhost = plantGhostScene.instantiate()
-	move_obj_to_mouse_pos(plantGhost)
+	plantGhost.transform.origin = raycast_Info.position
 	add_child(plantGhost)
 
 func state_exit() -> void: 
@@ -20,37 +22,47 @@ func state_exit() -> void:
 
 func handle_input(event) -> void: 
 	if event.is_action_pressed("ui_accept"):
-		plant_crop()
+		plant_crop(raycast_Info.position)
 	pass
+
+func physics_process_func(_delta:float) -> void: 
+	raycast_Info = paycast_from_cam()
+	pass
+
 
 func process_func(_delta) -> void: 
-	move_obj_to_mouse_pos(plantGhost)
+	plantGhost.transform.origin = Vector3(round(raycast_Info.position.x),raycast_Info.position.y,round(raycast_Info.position.z)) #round(raycast_Info.position) #crashes if raycast dosent intersect with anything need to fix
 	pass
 
-func move_obj_to_mouse_pos(object)->void:
-	var objectPlace = paycast_from_cam()
-	object.transform.origin = objectPlace
-	pass
-
-func paycast_from_cam() -> Vector3:
+func paycast_from_cam():
 	const RAY_LENGTH = 100.0
-	var cam = self.get_parent().get_parent().get_node("Camera3D")
 	var mouse_pos = get_viewport().get_mouse_position()
-	var from = cam.project_ray_origin(mouse_pos)
-	var to = from + cam.project_ray_normal(mouse_pos) * RAY_LENGTH
+	var from = playerCam.project_ray_origin(mouse_pos)
+	var to = from + playerCam.project_ray_normal(mouse_pos) * RAY_LENGTH
 	var ray_query = PhysicsRayQueryParameters3D.new()
 	var space = get_world_3d().direct_space_state
+	ray_query.collision_mask = 1
 	ray_query.from = from
 	ray_query.to = to
 	var result = space.intersect_ray(ray_query)
 	if result:
-		return result.position
-	return to
+		return result
+	print(result) 
+	return {"position":to}#need to do proper fix!!!
 
-func plant_crop()->void:
-	print('executed')
+func plant_crop(place_to_plant:Vector3)->void:
+	
+	#raycast
+	
+	
+	if not can_plant_crop(place_to_plant): return
 	var plant = plantScene.instantiate()
 	add_child(plant)
-	move_obj_to_mouse_pos(plant)
-	print(plant.transform.origin)
+	plant.transform.origin = Vector3(round(place_to_plant.x),place_to_plant.y,round(place_to_plant.z))
+	var rng = RandomNumberGenerator.new()
+	plant.rotate_y(rng.randf_range(0, 6))
 	pass
+
+func can_plant_crop(_place_to_plant)->bool:
+	
+	return true

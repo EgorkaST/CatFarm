@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bp6r82nkr08c8"
+path="res://.godot/imported/garden_bed.obj-07966f4696946917c09e8fe044cc7c72.mesh"
+
+[deps]
+
+files=["res://.godot/imported/garden_bed.obj-07966f4696946917c09e8fe044cc7c72.mesh"]
+
+source_file="res://assets/models/garden_bed.obj"
+dest_files=["res://.godot/imported/garden_bed.obj-07966f4696946917c09e8fe044cc7c72.mesh", "res://.godot/imported/garden_bed.obj-07966f4696946917c09e8fe044cc7c72.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

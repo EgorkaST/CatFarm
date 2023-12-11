@@ -10,6 +10,6 @@ func process_func(_delta:float) -> void: pass
 
 func physics_process_func(_delta:float) -> void: pass
 
-func state_enter(message = {}) -> void: pass
+func state_enter(_message = {}) -> void: pass
 
 func state_exit() -> void: pass

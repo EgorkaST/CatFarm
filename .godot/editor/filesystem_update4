@@ -1,7 +1,7 @@
 res://the_great_farmland.tscn
-res://scripts/state macine/StateMacine.gd
 res://scripts/state macine/states/plant.gd
+res://scripts/state macine/StateMacine.gd
 res://assets/scenes/plantGhost.tscn
-res://scripts/state macine/StateMacinesState.gd
-res://assets/plants/genericPlant.tscn
 res://assets/scenes/genericPlant.tscn
+res://scripts/RTScamera/rtsCam.gd
+res://Camera3D.gd
