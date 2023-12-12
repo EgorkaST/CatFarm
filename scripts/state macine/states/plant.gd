@@ -21,7 +21,7 @@ func state_exit() -> void:
 	Input.set_custom_mouse_cursor(defaultCursor)
 
 func handle_input(event) -> void: 
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("placeBuilding"):
 		plant_crop(raycast_Info.position)
 	pass
 

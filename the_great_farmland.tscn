@@ -95,17 +95,6 @@ script = ExtResource("5_govln")
 
 [node name="World" type="Node3D" parent="."]
 
-[node name="Land2" type="StaticBody3D" parent="World"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 9.03332)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Land2"]
-shape = SubResource("BoxShape3D_3iffy")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Land2"]
-material_override = SubResource("StandardMaterial3D_bldco")
-mesh = SubResource("BoxMesh_jpkna")
-skeleton = NodePath("../../Land2")
-
 [node name="Land" type="StaticBody3D" parent="World"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Land"]

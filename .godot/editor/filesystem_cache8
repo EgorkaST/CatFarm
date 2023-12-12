@@ -1,23 +1,23 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1702304645
-Camera3D.gd::GDScript::-1::1700219548::0::1::::<>Camera3D<>::
+::res://::1702374233
+Camera3D.gd::GDScript::-1::1702305746::0::1::::<>Camera3D<>::
 icon.svg::CompressedTexture2D::7355644369139907917::1698160432::1698160440::1::::<><>::
 plants.gd::GDScript::-1::1698528714::0::1::::<>MeshInstance3D<>::
-the_great_farmland.tscn::PackedScene::5955316738531890137::1702304645::0::1::::<><>::uid://cxem5d0sb6qhp::::res://placeholders/templategrid_albedo.png<>res://Camera3D.gd<>res://scripts/state macine/PlayerStateMacine.gd<>res://scripts/state macine/states/interaction.gd<>res://scripts/state macine/states/plant.gd<>uid://cf26fecn3by6t::::res://assets/scenes/plantGhost.tscn<>res://scripts/state macine/states/delete.gd<>uid://o13fev2aoqyh::::res://assets/scenes/genericPlant.tscn
+the_great_farmland.tscn::PackedScene::5955316738531890137::1702318121::0::1::::<><>::uid://cxem5d0sb6qhp::::res://placeholders/templategrid_albedo.png<>res://scripts/RTScamera/rtsCam.gd<>res://Camera3D.gd<>res://scripts/state macine/PlayerStateMacine.gd<>res://scripts/state macine/states/interaction.gd<>res://scripts/state macine/states/plant.gd<>uid://cf26fecn3by6t::::res://assets/scenes/plantGhost.tscn<>res://scripts/state macine/states/delete.gd<>uid://o13fev2aoqyh::::res://assets/scenes/genericPlant.tscn
 ::res://assets/::1701618175
-::res://assets/cursors/::1700496068
+::res://assets/cursors/::1702318061
 default-cursor.png::CompressedTexture2D::6838727920013311866::1700495798::1700495798::1::::<><>::
-plant-cursor.png::CompressedTexture2D::1034058989369360669::1700496068::1700496068::1::::<><>::
+plant-cursor.png::CompressedTexture2D::1034058989369360669::1700496068::1702318061::1::::<><>::
 showel-cursor.png::CompressedTexture2D::8067693187073521308::1700495725::1700495725::1::::<><>::
 ::res://assets/models/::1701861444
 carrots.obj::Mesh::4525683882461373146::1701861444::1701861444::1::::<><>::
 crop_hole.obj::Mesh::8535790569429637961::1701618873::1701618882::1::::<><>::
 garden_bed.obj::Mesh::3504341607406335425::1701618182::1701618183::1::::<><>::
 ::res://assets/plants/::1701279576
-::res://assets/scenes/::1702304645
-genericPlant.tscn::PackedScene::1038026881066612359::1702304645::0::1::::<><>::uid://deniokekysw20::::res://assets/textures/garden bed texture.png<>uid://bp6r82nkr08c8::::res://assets/models/garden_bed.obj<>uid://bhrpu8vsxqg21::::res://assets/textures/carrot texture.png<>uid://b5qjl8kd4vg0y::::res://assets/models/carrots.obj
+::res://assets/scenes/::1702318094
+genericPlant.tscn::PackedScene::1038026881066612359::1702318094::0::1::::<><>::uid://deniokekysw20::::res://assets/textures/garden bed texture.png<>uid://bp6r82nkr08c8::::res://assets/models/garden_bed.obj<>uid://bhrpu8vsxqg21::::res://assets/textures/carrot texture.png<>uid://b5qjl8kd4vg0y::::res://assets/models/carrots.obj
 plantGhost.gd::GDScript::-1::1701604839::0::1::::<>Node3D<>::
-plantGhost.tscn::PackedScene::5181415154492418297::1702304645::0::1::::<><>::res://assets/scenes/plantGhost.gd
+plantGhost.tscn::PackedScene::5181415154492418297::1702318094::0::1::::<><>::res://assets/scenes/plantGhost.gd
 ::res://assets/textures/::1701858923
 carrot texture.png::CompressedTexture2D::2913785248308596408::1701858865::1701858922::1::::<><>::
 garden bed texture.png::CompressedTexture2D::7467365605390889303::1701618194::1701618767::1::::<><>::
@@ -27,12 +27,14 @@ DZbvdziIbpg.jpg::CompressedTexture2D::2145351181793361229::1698240178::170050170
 placeholder_plant.obj::Mesh::343967856313812305::1701590982::1701590982::1::::<><>::
 placeholder_plant_texture.png::CompressedTexture2D::3571821104914016979::1701593259::1701593431::1::::<><>::
 templategrid_albedo.png::CompressedTexture2D::6396224656818102469::1698162612::1700501709::1::::<><>::
-::res://scripts/::1700064943
-::res://scripts/state macine/::1702303925
+::res://scripts/::1702304722
+::res://scripts/RTScamera/::1702316191
+rtsCam.gd::GDScript::-1::1702316191::0::1::::<>Node3D<>::
+::res://scripts/state macine/::1702318094
 PlayerStateMacine.gd::GDScript::-1::1700485933::0::1::::<>StateMacine<>::
-StateMacine.gd::GDScript::-1::1702303925::0::1::::StateMacine<>Node3D<>::
+StateMacine.gd::GDScript::-1::1702318094::0::1::::StateMacine<>Node3D<>::
 StateMacinesState.gd::GDScript::-1::1701511181::0::1::::StateMacinesState<>Node3D<>::
-::res://scripts/state macine/states/::1702303925
+::res://scripts/state macine/states/::1702318094
 delete.gd::GDScript::-1::1700496458::0::1::::<>StateMacinesState<>::
 interaction.gd::GDScript::-1::1700498629::0::1::::<>StateMacinesState<>::
-plant.gd::GDScript::-1::1702303925::0::1::::<>StateMacinesState<>::
+plant.gd::GDScript::-1::1702318094::0::1::::<>StateMacinesState<>::
