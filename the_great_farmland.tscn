@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://cq32gxjg61p4d"]
+[gd_scene load_steps=21 format=3 uid="uid://cq32gxjg61p4d"]
 
 [ext_resource type="Texture2D" uid="uid://cxem5d0sb6qhp" path="res://placeholders/templategrid_albedo.png" id="1_0wce5"]
 [ext_resource type="Script" path="res://scripts/RTScamera/rtsCam.gd" id="1_14cdu"]
+[ext_resource type="Script" path="res://scripts/RTSgrid/RTSgrid.gd" id="1_n6qyc"]
 [ext_resource type="Script" path="res://Camera3D.gd" id="1_u10tv"]
 [ext_resource type="Script" path="res://scripts/state macine/PlayerStateMacine.gd" id="2_hn4f7"]
 [ext_resource type="Script" path="res://scripts/state macine/states/interaction.gd" id="3_cqd5r"]
@@ -66,15 +67,19 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="LevelProperties"]
 environment = SubResource("Environment_etgf2")
 
+[node name="RTSGrid" type="Node3D" parent="LevelProperties"]
+script = ExtResource("1_n6qyc")
+step = 0.5
+
 [node name="Player" type="Node3D" parent="."]
 script = SubResource("GDScript_4xkvb")
 
-[node name="rtsCam" type="Node3D" parent="Player"]
+[node name="RTSCam" type="Node3D" parent="Player"]
 transform = Transform3D(-0.861629, 0, -0.507538, 0, 1, 0, 0.507538, 0, -0.861629, 4.08543, 6.3296, 0)
 script = ExtResource("1_14cdu")
 cameraCurrentHeight = 6.18
 
-[node name="Camera3d" type="Camera3D" parent="Player/rtsCam"]
+[node name="Camera3d" type="Camera3D" parent="Player/RTSCam"]
 transform = Transform3D(1, 0, 0, 0, 0.937889, 0.346936, 0, -0.346936, 0.937889, 0, 0, 0)
 fov = 90.0
 size = 10.0
@@ -85,11 +90,12 @@ script = ExtResource("1_u10tv")
 script = ExtResource("2_hn4f7")
 initial_state = NodePath("interaction")
 
-[node name="plant" type="Node3D" parent="Player/StateMacine2" node_paths=PackedStringArray("playerCam")]
+[node name="plant" type="Node3D" parent="Player/StateMacine2" node_paths=PackedStringArray("levelGrid", "playerCam")]
 script = ExtResource("4_2p8nh")
+levelGrid = NodePath("../../../LevelProperties/RTSGrid")
 plantGhostScene = ExtResource("5_4nbfu")
 plantScene = ExtResource("5_tq5y2")
-playerCam = NodePath("../../rtsCam/Camera3d")
+playerCam = NodePath("../../RTSCam/Camera3d")
 
 [node name="interaction" type="Node3D" parent="Player/StateMacine2"]
 script = ExtResource("3_cqd5r")

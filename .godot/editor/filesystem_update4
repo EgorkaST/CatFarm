@@ -4,3 +4,6 @@ res://scripts/state macine/StateMacine.gd
 res://scripts/RTScamera/rtsCam.gd
 res://assets/scenes/plantGhost.tscn
 res://assets/scenes/genericPlant.tscn
+res://assets/scenes/plantGhost.gd
+res://scripts/RTSgrid/RTSgrid.gd
+res://boykisser.txt

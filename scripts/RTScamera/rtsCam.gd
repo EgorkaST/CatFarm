@@ -1,3 +1,4 @@
+class_name RTSCam
 extends Node3D
 
 
@@ -12,7 +13,7 @@ var cameraMinHeight: float = 2
 var cameraBoundingBox: Vector2 = Vector2(40,40)
 @onready var cam: Camera3D = $Camera3d
 
-func _process(delta):
+func _process(_delta):
 	desiredLocation = calculateDesiredLocation()
 	zoomCamera()
 	pass
@@ -45,22 +46,22 @@ func cameraMoveInputs() -> Vector2:
 	return camInput.normalized()
 
 func moveCamByScreenBump() -> Vector2: 
-	const SENCETIVITY = 0.1
-	var screenBumpVector: Vector2 = Vector2(0,0)
+	const _SENCETIVITY = 0.1
+	var _screenBumpVector: Vector2 = Vector2(0,0)
 	#var middleOfScreen: Vector2
 	var mousePos: Vector2
 	#
 	mousePos = get_viewport().get_mouse_position()
 	#middleOfScreen = get_viewport().get_visible_rect().size/2
 	if mousePos.x <= 0:
-		screenBumpVector.x = -1	
+		_screenBumpVector.x = -1	
 	if mousePos.x >= get_viewport().get_visible_rect().size.x:
-		screenBumpVector.x = 1	
+		_screenBumpVector.x = 1	
 	if mousePos.y <= 0:
-		screenBumpVector.y = -1	
+		_screenBumpVector.y = -1	
 	if mousePos.y >= get_viewport().get_visible_rect().size.y:
-		screenBumpVector.y = 1	
-	return screenBumpVector
+		_screenBumpVector.y = 1	
+	return _screenBumpVector
 
 
 func cameraMoveVector()->Vector3:
@@ -71,11 +72,11 @@ func cameraMoveVector()->Vector3:
 	return camMoveVector
 
 func calculateDesiredLocation()->Vector3:
-	var desiredLocation: Vector3
-	var cameraRotation: float = self.rotation.y
-	desiredLocation = position + cameraMoveVector().rotated(Vector3(0,1,0),cameraRotation)
-	desiredLocation.y = calculateCameraHeight()
-	return desiredLocation
+	var _desiredLocation: Vector3
+	var _cameraRotation: float = self.rotation.y
+	_desiredLocation = position + cameraMoveVector().rotated(Vector3(0,1,0),_cameraRotation)
+	_desiredLocation.y = calculateCameraHeight()
+	return _desiredLocation
 
 # TODO make here raycast to determine cam height
 func calculateCameraHeight()->float: 
@@ -87,6 +88,7 @@ func calculateCameraHeight()->float:
 	raycastEnd.y -= 100
 	var raycastQuery = PhysicsRayQueryParameters3D.create(origin, raycastEnd)
 	raycastQuery.exclude = [self]
+	raycastQuery.collision_mask = 1
 	var result = space_state.intersect_ray(raycastQuery)
 	if result:
 		camHeight = cameraCurrentHeight + result.position.y
@@ -107,11 +109,11 @@ func zoomCamera()->void:
 func rotateCamZoom()->void:
 	var heightMultiplier: float = (cameraCurrentHeight-cameraMinHeight)/(cameraMaxHeight-cameraMinHeight)
 	var cameraCalculatedAngle: float = botCamAngle + (topCamAngle-botCamAngle)*heightMultiplier
-	print(cameraCalculatedAngle)
+	#print(cameraCalculatedAngle)
 	cam.rotation.x = deg_to_rad(cameraCalculatedAngle) 
 	pass
-func moveCameraToDesiredLocation(delta, desiredLocation:Vector3) -> void: 
-	var targetPosition = desiredLocation
+func moveCameraToDesiredLocation(delta, _desiredLocation:Vector3) -> void: 
+	var targetPosition = _desiredLocation
 	targetPosition.x = clampf(targetPosition.x,-cameraBoundingBox.x,cameraBoundingBox.x)
 	targetPosition.z = clampf(targetPosition.z,-cameraBoundingBox.y,cameraBoundingBox.y)
 	position = position.move_toward(targetPosition,delta*20)

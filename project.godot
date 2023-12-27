@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [display]
 
-mouse_cursor/custom_image="res://assets/cursors/showel-cursor.png"
+mouse_cursor/custom_image="res://assets/cursors/paw-coursor.png"
 mouse_cursor/tooltip_position_offset=Vector2(1, 1)
 
 [dotnet]

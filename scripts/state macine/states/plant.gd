@@ -1,5 +1,5 @@
 extends StateMacinesState
-
+@export var levelGrid: RTSGrid
 @export var plantGhostScene: PackedScene
 @export var plantScene: PackedScene
 @export var playerCam: Camera3D
@@ -31,8 +31,13 @@ func physics_process_func(_delta:float) -> void:
 
 
 func process_func(_delta) -> void: 
-	plantGhost.transform.origin = Vector3(round(raycast_Info.position.x),raycast_Info.position.y,round(raycast_Info.position.z)) #round(raycast_Info.position) #crashes if raycast dosent intersect with anything need to fix
+	plantGhost.transform.origin = where_to_move_ghost()
 	pass
+
+func where_to_move_ghost()->Vector3:
+	var _where_to_move_ghost: Vector3 = Vector3(0,0,0)
+	_where_to_move_ghost = levelGrid.snap_to_grid(raycast_Info.position)
+	return _where_to_move_ghost
 
 func paycast_from_cam():
 	const RAY_LENGTH = 100.0
@@ -51,14 +56,11 @@ func paycast_from_cam():
 	return {"position":to}#need to do proper fix!!!
 
 func plant_crop(place_to_plant:Vector3)->void:
-	
-	#raycast
-	
-	
-	if not can_plant_crop(place_to_plant): return
+	if not can_plant_crop(place_to_plant): 
+		return
 	var plant = plantScene.instantiate()
 	add_child(plant)
-	plant.transform.origin = Vector3(round(place_to_plant.x),place_to_plant.y,round(place_to_plant.z))
+	plant.transform.origin = levelGrid.snap_to_grid(place_to_plant)
 	var rng = RandomNumberGenerator.new()
 	plant.rotate_y(rng.randf_range(0, 6))
 	pass
